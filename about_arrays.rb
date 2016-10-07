@@ -17,7 +17,7 @@ class AboutArrays < Neo::Koan
     array[1] = 2
     assert_equal [1, 2], array
 
-    array << 333
+    array << 333 #appends value to the end of the array
     assert_equal [1, 2, 333], array
   end
 
@@ -28,18 +28,18 @@ class AboutArrays < Neo::Koan
     assert_equal :peanut, array.first
     assert_equal :jelly, array[3]
     assert_equal :jelly, array.last
-    assert_equal :jelly, array[-1]
+    assert_equal :jelly, array[-1] #reverses index
     assert_equal :butter, array[-3]
   end
 
   def test_slicing_arrays
     array = [:peanut, :butter, :and, :jelly]
 
-    assert_equal [:peanut], array[0,1]
+    assert_equal [:peanut], array[0,1] # array[index of array, number of members preceding that index]
     assert_equal [:peanut, :butter], array[0,2]
     assert_equal [:and, :jelly], array[2,2]
-    assert_equal [:and, :jelly], array[2,20]
-    assert_equal [], array[4,0]
+    assert_equal [:and, :jelly], array[2,20] # if number greater than index range will just print possible values
+    assert_equal [], array[4,0] # if index doesn't exist return empty array
     assert_equal [], array[4,100]
     assert_equal nil, array[5,0]
   end
@@ -47,8 +47,8 @@ class AboutArrays < Neo::Koan
   def test_arrays_and_ranges
     assert_equal Range, (1..5).class
     assert_not_equal [1,2,3,4,5], (1..5)
-    assert_equal [1,2,3,4,5], (1..5).to_a
-    assert_equal [1,2,3,4], (1...5).to_a
+    assert_equal [1,2,3,4,5], (1..5).to_a # two dots means include upper bound
+    assert_equal [1,2,3,4], (1...5).to_a # three dots means exclude upper bound
   end
 
   def test_slicing_with_ranges
@@ -61,24 +61,24 @@ class AboutArrays < Neo::Koan
 
   def test_pushing_and_popping_arrays
     array = [1,2]
-    array.push(:last)
+    array.push(:last) # .push, add value to the end of array
 
     assert_equal [1,2, :last], array
 
-    popped_value = array.pop
+    popped_value = array.pop # .pop remove and store the last value of the array.
     assert_equal :last, popped_value
-    assert_equal [1,2], array
+    assert_equal [1,2], array #  original array is now without ":last"
   end
 
   def test_shifting_arrays
     array = [1,2]
-    array.unshift(:first)
+    array.unshift(:first) # .unshift opposite of .push, adds element to front of the array.
 
     assert_equal [:first, 1,2], array
 
-    shifted_value = array.shift
+    shifted_value = array.shift # .shift opposite of .pop, removes first element of array and stores this value
     assert_equal :first, shifted_value
-    assert_equal [1,2], array
+    assert_equal [1,2], array # original array is now without ":first"
   end
 
 end
