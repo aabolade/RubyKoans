@@ -32,12 +32,15 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 def score(dice)
   # You need to write this method
 $result = 0
+
+# first turn dice result into hash: {number => frequency}
 def make_hash(dice)
   result = Hash.new(0)
   dice.each {|score| result[score]+=1 }
   result
 end
 
+# method to calculate score for each number
 def calculate_result(key,value)
   if key == 1
     $result += value * 100
@@ -48,10 +51,13 @@ def calculate_result(key,value)
   end
 end
 
+# make sure dice is not nil
   if dice.size == 0
     $result
   else
+    # iterate through hash dice score
     make_hash(dice).each do |key, value|
+      # if frequency greater or equal to 3
       if value >= 3
         if key == 1
           $result += 1000 + calculate_result(key,value-3)
